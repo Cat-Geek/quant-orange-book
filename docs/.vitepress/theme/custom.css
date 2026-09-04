@@ -1,0 +1,353 @@
+/* ============================================================
+   AI 量化橙皮书 · 橙色主题定制
+   主色 #F97316（浅）/ #FB923C（深）
+   ============================================================ */
+
+:root {
+  --ob-orange-1: #F97316;
+  --ob-orange-2: #EA580C;
+  --ob-orange-3: #FB923C;
+  --ob-orange-soft: rgba(249, 115, 22, 0.12);
+  --ob-ink: #1c2430;
+
+  --vp-c-brand-1: var(--ob-orange-1);
+  --vp-c-brand-2: var(--ob-orange-2);
+  --vp-c-brand-3: var(--ob-orange-3);
+  --vp-c-brand-soft: var(--ob-orange-soft);
+  --vp-button-brand-bg: var(--ob-orange-1);
+  --vp-button-brand-hover-bg: var(--ob-orange-2);
+  --vp-button-brand-active-bg: var(--ob-orange-2);
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(120deg, #F97316 20%, #FB923C 60%, #FBBF24 100%);
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #F9731640 40%, #FBBF2440 60%);
+  --vp-home-hero-image-filter: blur(44px);
+}
+
+.dark {
+  --vp-c-brand-1: var(--ob-orange-3);
+  --vp-c-brand-2: var(--ob-orange-1);
+  --vp-c-brand-3: var(--ob-orange-2);
+  --ob-ink: #e8ecf2;
+}
+
+/* ---------- Hero 字体与排版 ---------- */
+.VPHero .name,
+.VPHero .text {
+  letter-spacing: -0.02em;
+}
+.VPHero .tagline {
+  opacity: 0.92;
+}
+.VPButton.brand {
+  box-shadow: 0 8px 24px -8px rgba(249, 115, 22, 0.55);
+}
+
+/* ---------- Hero 净值曲线装饰（浅/深都可见） ---------- */
+.VPHero.has-image .main { position: relative; }
+.ob-curve-band {
+  position: relative;
+  margin: -8px auto 0;
+  max-width: 1152px;
+  padding: 0 24px;
+  pointer-events: none;
+}
+.ob-curve-band svg {
+  width: 100%;
+  height: 120px;
+  display: block;
+}
+
+/* ---------- 数据徽章行 ---------- */
+.ob-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  max-width: 960px;
+  margin: 20px auto 0;
+  padding: 0 24px;
+}
+.ob-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ob-ink);
+  transition: transform .18s ease, border-color .18s ease;
+}
+.ob-badge:hover { transform: translateY(-2px); border-color: var(--ob-orange-1); }
+.ob-badge b { color: var(--ob-orange-1); font-size: 15px; }
+.ob-badge .dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, .18);
+  animation: obPulse 2s infinite;
+}
+@keyframes obPulse {
+  0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,.18); }
+  50% { box-shadow: 0 0 0 6px rgba(34,197,94,.06); }
+}
+
+/* ---------- 通用区块标题 ---------- */
+.ob-section { max-width: 1152px; margin: 56px auto 0; padding: 0 24px; }
+.ob-section h2 {
+  border: none;
+  font-size: 26px;
+  line-height: 1.3;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+.ob-section .ob-sub { color: var(--vp-c-text-2); margin: 0 0 22px; font-size: 15px; }
+
+/* ---------- 四篇阅读路径卡片 ---------- */
+.vp-doc a.ob-path,
+.vp-doc a.ob-path:hover,
+.vp-doc a.ob-solve-card,
+.vp-doc a.ob-solve-card:hover {
+  text-decoration: none;
+  color: inherit;
+}
+.vp-doc .ob-path h3,
+.vp-doc .ob-solve-card .q {
+  color: var(--vp-c-text-1) !important;
+  text-decoration: none;
+}
+.vp-doc .ob-path p,
+.vp-doc .ob-solve-card .a {
+  color: var(--vp-c-text-2) !important;
+  text-decoration: none;
+}
+.ob-paths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.ob-path {
+  position: relative;
+  display: block;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 20px 22px 18px;
+  background: var(--vp-c-bg);
+  overflow: hidden;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.ob-path::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--ob-orange-1), var(--ob-orange-3));
+  opacity: .85;
+}
+.ob-path:hover {
+  transform: translateY(-3px);
+  border-color: var(--ob-orange-1);
+  box-shadow: 0 14px 34px -16px rgba(249, 115, 22, 0.45);
+}
+.ob-path .part {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--ob-orange-1);
+  text-transform: uppercase;
+}
+.ob-path h3 { margin: 6px 0 8px; font-size: 18px; border: none; padding: 0; }
+.ob-path p { margin: 0 0 12px; color: var(--vp-c-text-2); font-size: 14px; line-height: 1.7; }
+.ob-path .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.ob-path .tag {
+  font-size: 12px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--ob-orange-soft);
+  color: var(--ob-orange-2);
+  font-weight: 600;
+}
+.dark .ob-path .tag { color: var(--ob-orange-3); }
+
+/* ---------- 场景直达六宫格 ---------- */
+.ob-solve-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.ob-solve-card {
+  display: block;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 16px 18px;
+  background: var(--vp-c-bg-soft);
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+.ob-solve-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--ob-orange-1);
+  background: var(--vp-c-bg);
+}
+.ob-solve-card .q { font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+.ob-solve-card .a { font-size: 13px; color: var(--vp-c-text-2); }
+.ob-solve-card .a b { color: var(--ob-orange-1); font-weight: 700; }
+
+/* ---------- 方法论四步 ---------- */
+.ob-method {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  counter-reset: obstep;
+}
+.ob-step {
+  position: relative;
+  border: 1px dashed var(--vp-c-divider);
+  border-radius: 12px;
+  padding: 18px 16px 14px;
+  text-align: center;
+  background: var(--vp-c-bg);
+}
+.ob-step .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ob-orange-1), var(--ob-orange-3));
+  color: #fff;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.ob-step .en { font-size: 11px; letter-spacing: .16em; color: var(--vp-c-text-3); font-weight: 700; }
+.ob-step h4 { margin: 4px 0 6px; font-size: 15.5px; border: none; padding: 0; }
+.ob-step p { margin: 0; font-size: 13px; color: var(--vp-c-text-2); line-height: 1.65; }
+
+/* ---------- LIVE 统计条 ---------- */
+.ob-live {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  padding: 18px 24px;
+  background:
+    radial-gradient(600px 120px at 20% 0%, var(--ob-orange-soft), transparent),
+    var(--vp-c-bg-soft);
+}
+.ob-live .cell { text-align: center; min-width: 88px; }
+.ob-live .num { font-size: 22px; font-weight: 800; color: var(--ob-orange-1); }
+.ob-live .lbl { font-size: 12px; color: var(--vp-c-text-2); margin-top: 2px; }
+
+/* ---------- 页脚前 CTA 横幅 ---------- */
+.ob-cta {
+  max-width: 1152px;
+  margin: 56px auto 0;
+  padding: 0 24px 1px;
+}
+.ob-cta .inner {
+  border-radius: 16px;
+  padding: 30px 32px;
+  background:
+    radial-gradient(800px 200px at 90% -20%, rgba(251, 191, 36, .25), transparent),
+    linear-gradient(120deg, rgba(249, 115, 22, .16), rgba(249, 115, 22, .05));
+  border: 1px solid var(--ob-orange-1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.ob-cta h3 { margin: 0 0 6px; border: none; padding: 0; font-size: 20px; }
+.ob-cta p { margin: 0; color: var(--vp-c-text-2); font-size: 14px; }
+
+/* ---------- 写作中徽章 ---------- */
+.ob-wip {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: rgba(234, 179, 8, .15);
+  color: #a16207;
+  border: 1px solid rgba(234, 179, 8, .4);
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.dark .ob-wip { color: #fde047; }
+
+/* ---------- 三大神级 callout（内置容器重新着色） ---------- */
+/* ⚠️ 坑位 = warning 容器，红色系 */
+.custom-block.warning {
+  border-color: rgba(239, 68, 68, .5);
+  background: rgba(239, 68, 68, .07);
+}
+.custom-block.warning .custom-block-title { color: #dc2626; }
+.dark .custom-block.warning .custom-block-title { color: #f87171; }
+
+/* 💡 人话翻译 = tip 容器，橙色系 */
+.custom-block.tip {
+  border-color: var(--ob-orange-1);
+  background: var(--ob-orange-soft);
+}
+.custom-block.tip .custom-block-title { color: var(--ob-orange-2); }
+.dark .custom-block.tip .custom-block-title { color: var(--ob-orange-3); }
+
+/* 📋 自查清单 = info 容器，蓝色系 */
+.custom-block.info {
+  border-color: rgba(59, 130, 246, .45);
+  background: rgba(59, 130, 246, .07);
+}
+.custom-block.info .custom-block-title { color: #2563eb; }
+.dark .custom-block.info .custom-block-title { color: #60a5fa; }
+
+/* ---------- 章节元信息条 ---------- */
+.ob-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 4px 0 20px;
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+}
+.ob-meta .chip {
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  font-weight: 600;
+}
+.ob-meta .chip.hot { color: var(--ob-orange-2); border-color: var(--ob-orange-1); background: var(--ob-orange-soft); }
+.dark .ob-meta .chip.hot { color: var(--ob-orange-3); }
+
+/* ---------- 交互演示容器 ---------- */
+.ob-demo {
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 18px 0;
+  box-shadow: 0 10px 30px -18px rgba(0,0,0,.35);
+}
+.ob-demo iframe { display: block; width: 100%; border: none; height: 460px; background: #fff; }
+.ob-demo .cap {
+  padding: 10px 16px;
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+  border-top: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg-soft);
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 860px) {
+  .ob-paths { grid-template-columns: 1fr; }
+  .ob-solve-grid { grid-template-columns: repeat(2, 1fr); }
+  .ob-method { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .ob-solve-grid { grid-template-columns: 1fr; }
+  .ob-method { grid-template-columns: 1fr; }
+  .ob-live { gap: 20px; }
+}

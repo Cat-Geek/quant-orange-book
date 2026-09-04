@@ -1,0 +1,17 @@
+{
+  "name": "quant-orange-book",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev docs --port 3081",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs --port 3081"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  }
+}

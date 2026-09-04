@@ -1,0 +1,170 @@
+---
+layout: home
+
+hero:
+  name: "AI 量化橙皮书"
+  text: "量化知识 × AI 知识"
+  tagline: 一本免费开源的结构化读本——从零学量化，用 AI 提效，把每一步的坑提前踩给你看。不荐股、不承诺收益、正文永远免费。
+  actions:
+    - theme: brand
+      text: 📖 开始阅读
+      link: /book/
+    - theme: alt
+      text: 🗺️ 查看阅读路线
+      link: /guide/
+    - theme: alt
+      text: 🚀 5 分钟跑通第一个回测
+      link: /book/warmup
+
+features:
+  - icon: 🍊
+    title: 真实策略
+    details: 每章案例来自真实策略库完整拆解——逻辑、代码、回测、复盘，不装神弄鬼
+  - icon: 🤖
+    title: AI 工作流
+    details: 用 DeepSeek / Claude 学量化、写策略、验代码，附开源工具三巨头横评
+  - icon: ⚠️
+    title: 避坑体系
+    details: 未来函数、过拟合、幸存者偏差……每个坑讲到代码级，配交互演示与自查清单
+  - icon: 🆓
+    title: 永久免费
+    details: 正文永远免费开放，开源共建；深度源码与陪跑在知识星球
+---
+
+<!-- Hero 净值曲线装饰 -->
+<div class="ob-curve-band" aria-hidden="true">
+<svg viewBox="0 0 1200 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="obg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F97316" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#F97316" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M0,118 L55,104 L110,112 L165,88 L220,96 L275,72 L330,84 L385,58 L440,70 L495,46 L550,60 L605,36 L660,52 L715,28 L770,42 L825,20 L880,34 L935,14 L990,26 L1045,8 L1100,18 L1155,4 L1200,12 L1200,140 L0,140 Z" fill="url(#obg)"/>
+  <path d="M0,118 L55,104 L110,112 L165,88 L220,96 L275,72 L330,84 L385,58 L440,70 L495,46 L550,60 L605,36 L660,52 L715,28 L770,42 L825,20 L880,34 L935,14 L990,26 L1045,8 L1100,18 L1155,4 L1200,12" stroke="#F97316" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+</div>
+
+<!-- 数据徽章 -->
+<div class="ob-badges">
+  <span class="ob-badge"><b>27</b> CHAPTERS</span>
+  <span class="ob-badge"><b>4</b> PARTS</span>
+  <span class="ob-badge"><b>∞</b> WORKFLOWS</span>
+  <span class="ob-badge">🆓 OPEN SOURCE</span>
+  <span class="ob-badge">🚫 不荐股 · 不承诺收益</span>
+  <span class="ob-badge"><span class="dot"></span> 持续更新中</span>
+</div>
+
+<!-- 阅读路径 -->
+<section class="ob-section">
+  <h2>四段路径，按你的目标进入</h2>
+  <p class="ob-sub">从零基础到 AI 协作，循序渐进；也可以带着问题直接跳读。</p>
+  <div class="ob-paths">
+    <a class="ob-path" href="/book/part1/">
+      <div class="part">PART 01 · CH.01—05</div>
+      <h3>认知篇：先搞懂游戏规则</h3>
+      <p>散户为什么亏钱、量化是什么、AI 时代学量化有哪些不一样——不写代码，先建立正确认知。</p>
+      <div class="tags"><span class="tag">零基础</span><span class="tag">新手推荐</span><span class="tag">0 代码</span></div>
+    </a>
+    <a class="ob-path" href="/book/part2/">
+      <div class="part">PART 02 · CH.06—10</div>
+      <h3>筑基篇：动手前的地基</h3>
+      <p>Python 最小必需品、数据源横评、第一个回测、指标人话指南，以及全书王牌——新手八大坑。</p>
+      <div class="tags"><span class="tag">最小可行</span><span class="tag">边读边做</span><span class="tag">⭐ 八大坑</span></div>
+    </a>
+    <a class="ob-path" href="/book/part3/">
+      <div class="part">PART 03 · CH.11—20</div>
+      <h3>实战篇：真实策略完整拆解</h3>
+      <p>ETF 轮动、红利低波、小市值、多因子、可转债、B 圈……每章一个真实策略，外加 AI 写策略与验货指南。</p>
+      <div class="tags"><span class="tag">案例驱动</span><span class="tag">10 个案例</span><span class="tag">⭐ 验货指南</span></div>
+    </a>
+    <a class="ob-path" href="/book/part4/">
+      <div class="part">PART 04 · CH.21—27</div>
+      <h3>AI 协作篇：让 AI 当你的量化搭档</h3>
+      <p>用 AI 学量化、提示词模板库、开源工具横评、知识管理——AI 知识主线，与传统量化教程彻底拉开差距。</p>
+      <div class="tags"><span class="tag">AI 主线</span><span class="tag">模板库</span><span class="tag">工具横评</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- 场景直达 -->
+<section class="ob-section">
+  <h2>你现在最想搞清楚什么？</h2>
+  <p class="ob-sub">不必从头读。带着问题进来，一步跳到答案。</p>
+  <div class="ob-solve-grid">
+    <a class="ob-solve-card" href="/book/part1/ch1">
+      <div class="q">😅 "我总是追涨杀跌，怎么破？"</div>
+      <div class="a">→ <b>第 1 章</b> 散户为什么亏钱</div>
+    </a>
+    <a class="ob-solve-card" href="/book/part2/ch10">
+      <div class="q">👻 "未来函数到底是什么鬼？"</div>
+      <div class="a">→ <b>第 10 章</b> 新手八大坑（配交互演示）</div>
+    </a>
+    <a class="ob-solve-card" href="/book/part3/ch20">
+      <div class="q">🤥 "AI 说这策略年化 50%，可信吗？"</div>
+      <div class="a">→ <b>第 20 章</b> AI 生成代码验货指南</div>
+    </a>
+    <a class="ob-solve-card" href="/book/part3/ch19">
+      <div class="q">✍️ "AI 能帮我写策略吗？"</div>
+      <div class="a">→ <b>第 19 章</b> + 第四篇 AI 协作篇</div>
+    </a>
+    <a class="ob-solve-card" href="/book/warmup">
+      <div class="q">⏱️ "先随便看看，别劝我学"</div>
+      <div class="a">→ <b>第 0 步</b> 5 分钟跑通第一个回测</div>
+    </a>
+    <a class="ob-solve-card" href="/book/appendix/c-checklists">
+      <div class="q">📋 "有没有能直接打印的避坑清单？"</div>
+      <div class="a">→ <b>附录 C</b> 避坑自查清单合集</div>
+    </a>
+  </div>
+</section>
+
+<!-- 方法论 -->
+<section class="ob-section">
+  <h2>这本书怎么带你学</h2>
+  <p class="ob-sub">不是知识点堆砌，而是一条「跑通 → 复盘 → 沉淀 → 成体系」的循环。</p>
+  <div class="ob-method">
+    <div class="ob-step"><div class="num">1</div><div class="en">RUN</div><h4>跑通一个实验</h4><p>每章 30 分钟内跑出第一个可看的结果，先摸到成果再谈理论</p></div>
+    <div class="ob-step"><div class="num">2</div><div class="en">REVIEW</div><h4>复盘为什么</h4><p>赚钱赚的是什么钱？什么行情会死？——人话复盘，不堆公式</p></div>
+    <div class="ob-step"><div class="num">3</div><div class="en">DISTILL</div><h4>沉淀成清单</h4><p>每章留下一份可复用的模板、清单或代码，读书变成动手</p></div>
+    <div class="ob-step"><div class="num">4</div><div class="en">SYSTEM</div><h4>组装成体系</h4><p>把工具、模板、清单组装成你自己的 AI 量化工作台</p></div>
+  </div>
+</section>
+
+<!-- LIVE 统计 -->
+<section class="ob-section">
+  <div class="ob-live">
+    <div class="cell"><div class="num" id="ob-live-today">—</div><div class="lbl">今日阅读</div></div>
+    <div class="cell"><div class="num" id="ob-live-total">—</div><div class="lbl">累计阅读</div></div>
+    <div class="cell"><div class="num">27</div><div class="lbl">章节规划</div></div>
+    <div class="cell"><div class="num">2026</div><div class="lbl">开始写作</div></div>
+  </div>
+</section>
+
+<!-- 尾部 CTA -->
+<div class="ob-cta">
+  <div class="inner">
+    <div>
+      <h3>🍊 这本橙皮书，和你一起长出来</h3>
+      <p>公众号「猫哥AI量化」日更陪读 · 知识星球拿完整源码包与实操陪跑 · GitHub 提 Issue 共创</p>
+    </div>
+    <a class="VPButton medium brand" href="/about/">认识猫哥 →</a>
+  </div>
+</div>
+
+<script>
+// 轻量 LIVE 计数：优先不蒜子，失败则显示占位文案，保持页面"活"感
+// （typeof 守卫：避免 SSG 构建期在 Node 环境执行 DOM 操作）
+if (typeof document !== 'undefined') {
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = '//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js';
+  s.onerror = function () {
+    var t = document.getElementById('ob-live-today');
+    var g = document.getElementById('ob-live-total');
+    if (t) t.textContent = '上线首周';
+    if (g) g.textContent = '敬请期待';
+  };
+  document.body.appendChild(s);
+}
+</script>

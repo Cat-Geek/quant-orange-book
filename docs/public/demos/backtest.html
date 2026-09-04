@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>迷你回测模拟器 · AI 量化橙皮书</title>
+<style>
+  :root { --orange:#F97316; --ink:#1c2430; --muted:#6b7280; --grid:#e5e7eb; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif; background:#fffdfa; color:var(--ink); padding:20px 22px 16px; }
+  header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-bottom:14px; }
+  h1 { font-size:17px; letter-spacing:-.01em; }
+  h1 .tag { display:inline-block; margin-left:8px; font-size:11px; font-weight:700; color:var(--orange); background:rgba(249,115,22,.12); border:1px solid rgba(249,115,22,.4); padding:2px 10px; border-radius:999px; vertical-align:2px;}
+  .btn { cursor:pointer; border:1px solid var(--orange); color:var(--orange); background:#fff; font-weight:700; font-size:13px; padding:7px 16px; border-radius:999px; transition:.15s; }
+  .btn:hover { background:var(--orange); color:#fff; }
+  .legend { display:flex; gap:16px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin-bottom:8px; }
+  .legend i { display:inline-block; width:18px; height:3px; border-radius:2px; margin-right:5px; vertical-align:3px; }
+  canvas { width:100%; height:200px; display:block; background:#fff; border:1px solid var(--grid); border-radius:10px; }
+  canvas + .lbl, .lbl { font-size:12px; color:var(--muted); margin:4px 2px 10px; }
+  .stats { display:flex; gap:12px; flex-wrap:wrap; margin-top:4px; }
+  .stat { flex:1; min-width:130px; border:1px solid var(--grid); border-radius:10px; padding:10px 14px; background:#fff; }
+  .stat .k { font-size:11px; color:var(--muted); }
+  .stat .v { font-size:19px; font-weight:800; margin-top:2px; }
+  .stat .v.up { color:#16a34a; } .stat .v.down { color:#dc2626; }
+  .foot { margin-top:12px; font-size:12px; color:var(--muted); line-height:1.7; background:rgba(249,115,22,.07); border-left:3px solid var(--orange); padding:8px 12px; border-radius:0 8px 8px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>迷你回测模拟器：双均线策略<span class="tag">教学演示 · 非真实行情</span></h1>
+  <button class="btn" id="reroll">🎲 换一段行情</button>
+</header>
+<div class="legend">
+  <span><i style="background:#94a3b8"></i>价格</span>
+  <span><i style="background:var(--orange)"></i>MA5 快线</span>
+  <span><i style="background:#2563eb"></i>MA20 慢线</span>
+  <span>▲ 金叉买入 &nbsp; ▼ 死叉卖出</span>
+</div>
+<canvas id="price" height="200"></canvas>
+<div class="lbl">价格与均线（模拟日线）</div>
+<canvas id="equity" height="150"></canvas>
+<div class="lbl">策略净值 vs 一直拿着不动（Buy &amp; Hold）</div>
+<div class="stats">
+  <div class="stat"><div class="k">双均线策略收益</div><div class="v" id="s1">—</div></div>
+  <div class="stat"><div class="k">买入持有收益</div><div class="v" id="s2">—</div></div>
+  <div class="stat"><div class="k">交易次数</div><div class="v" id="s3">—</div></div>
+  <div class="stat"><div class="k">策略最大回撤</div><div class="v" id="s4">—</div></div>
+</div>
+<div class="foot">⚠️ 这是教学用的模拟行情，用于理解「策略 = 一套规则在历史数据上批量验证」。真实回测还要考虑手续费、滑点、未来函数——正文第 8、10 章展开。</div>
+
+<script>
+// ---------- 确定性伪随机（保证同一 seed 图形一致） ----------
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+var N = 240, price = [], seed = 20260903;
+
+function gen(seedN){
+  var rnd = mulberry32(seedN), p = 100, arr = [];
+  var trend = 0.0002;
+  for (var i=0;i<N;i++){
+    if (i%60===0) trend = (rnd()-0.42)*0.004;      // 阶段性趋势切换
+    var shock = (rnd()<0.02) ? (rnd()-0.5)*0.06 : 0; // 偶发跳动
+    p = p * (1 + trend + (rnd()-0.5)*0.02 + shock);
+    arr.push(p);
+  }
+  return arr;
+}
+function ma(arr,n){ var out=[]; for(var i=0;i<arr.length;i++){ if(i<n-1){out.push(null);continue;} var s=0; for(var j=i-n+1;j<=i;j++)s+=arr[j]; out.push(s/n);} return out; }
+
+function drawLine(cv, seriesList, marks){
+  var dpr = window.devicePixelRatio||1;
+  var w = cv.clientWidth, h = cv.height;
+  cv.width = w*dpr; cv.style.height = h+'px';
+  var ctx = cv.getContext('2d'); ctx.scale(dpr,dpr);
+  ctx.clearRect(0,0,w,h);
+  var all = seriesList.reduce(function(a,s){return a.concat(s.vals.filter(function(v){return v!==null}))},[]);
+  var min = Math.min.apply(null,all), max = Math.max.apply(null,all);
+  var pad = (max-min)*0.08; min-=pad; max+=pad;
+  function X(i){return i/(N-1)*(w-16)+8}
+  function Y(v){return h-14-(v-min)/(max-min)*(h-28)}
+  ctx.strokeStyle='#f3f4f6'; ctx.lineWidth=1;
+  for(var g=1;g<4;g++){ctx.beginPath();ctx.moveTo(8,h*g/4);ctx.lineTo(w-8,h*g/4);ctx.stroke();}
+  seriesList.forEach(function(s){
+    ctx.strokeStyle=s.color; ctx.lineWidth=s.width||1.6; ctx.beginPath(); var started=false;
+    s.vals.forEach(function(v,i){ if(v===null)return; if(!started){ctx.moveTo(X(i),Y(v));started=true;}else ctx.lineTo(X(i),Y(v)); });
+    ctx.stroke();
+  });
+  (marks||[]).forEach(function(m){
+    ctx.fillStyle=m.color; ctx.beginPath();
+    var y = Y(m.v) + (m.dir>0? -10: 10);
+    ctx.moveTo(X(m.i), y); ctx.lineTo(X(m.i)-6, y+ (m.dir>0? 9:-9)); ctx.lineTo(X(m.i)+6, y+(m.dir>0? 9:-9)); ctx.closePath(); ctx.fill();
+  });
+}
+
+function run(){
+  price = gen(seed);
+  var fast = ma(price,5), slow = ma(price,20);
+  var pos = false, equity = [100], buyhold = [100], trades = 0, peak=100, maxdd=0, entry=price[19];
+  var marks = [];
+  for(var i=20;i<N;i++){
+    if(!pos && fast[i]>slow[i] && fast[i-1]<=slow[i-1]){ pos=true; trades++; entry=price[i]; marks.push({i:i,v:price[i],dir:1,color:'#16a34a'}); }
+    else if(pos && fast[i]<slow[i] && fast[i-1]>=slow[i-1]){ pos=false; marks.push({i:i,v:price[i],dir:-1,color:'#dc2626'}); }
+    var nav = equity[equity.length-1];
+    if(pos) nav = nav * (price[i]/price[i-1]);
+    equity.push(nav);
+    buyhold.push(price[i]/price[19]*100);
+    peak = Math.max(peak, nav); maxdd = Math.max(maxdd, 1-nav/peak);
+  }
+  if(pos) equity[equity.length-1] = equity[equity.length-1]*(price[N-1]/price[N-2]); // 收尾
+  drawLine(document.getElementById('price'), [
+    {vals:price,color:'#94a3b8',width:1.4},
+    {vals:fast,color:'#F97316',width:2},
+    {vals:slow,color:'#2563eb',width:2}
+  ], marks);
+  drawLine(document.getElementById('equity'), [
+    {vals:buyhold,color:'#cbd5e1',width:1.6},
+    {vals:equity,color:'#F97316',width:2.2}
+  ], []);
+  function pct(x,el){ var e=document.getElementById(el); e.textContent=(x>=0?'+':'')+x.toFixed(1)+'%'; e.className='v '+(x>=0?'up':'down'); }
+  pct((equity[equity.length-1]-100), 's1');
+  pct((buyhold[buyhold.length-1]-100), 's2');
+  document.getElementById('s3').textContent = trades + ' 次';
+  document.getElementById('s4').textContent = '-'+(maxdd*100).toFixed(1)+'%';
+}
+document.getElementById('reroll').onclick = function(){ seed = Math.floor(Math.random()*1e8); run(); };
+window.addEventListener('resize', run);
+run();
+</script>
+</body>
+</html>
