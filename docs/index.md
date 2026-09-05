@@ -131,6 +131,38 @@ features:
   </div>
 </section>
 
+<!-- 平台手册 -->
+<section class="ob-section">
+  <h2>📱 平台手册：三大量化平台，跟着就能跑</h2>
+  <p class="ob-sub">聚宽、QMT、Ptrade——每一页都是「注册 → 装好 → 跑通第一个回测」的完整动线。</p>
+  <div class="ob-plat-grid">
+    <a class="ob-plat-card" href="/platforms/joinquant">
+      <div class="ic">☁️</div>
+      <h3>聚宽 JoinQuant</h3>
+      <p>在线平台零安装，浏览器里跑回测——新手第一站。<b>✅ 全量教程</b></p>
+      <span class="go">跟着学 →</span>
+    </a>
+    <a class="ob-plat-card" href="/platforms/qmt">
+      <div class="ic">🖥️</div>
+      <h3>QMT / miniQMT</h3>
+      <p>本地终端派，券商开通，为长期深耕铺路。<b>核心动线已发布</b></p>
+      <span class="go">跟着学 →</span>
+    </a>
+    <a class="ob-plat-card" href="/platforms/ptrade">
+      <div class="ic">🏦</div>
+      <h3>Ptrade</h3>
+      <p>券商提供的界面化终端，聚宽老手无缝迁移。<b>核心动线已发布</b></p>
+      <span class="go">跟着学 →</span>
+    </a>
+    <a class="ob-plat-card ob-plat-alt" href="/platforms/">
+      <div class="ic">🧭</div>
+      <h3>不知道选哪个？</h3>
+      <p>三分钟决策树：按你的情况给"第一站"建议。</p>
+      <span class="go">看选型 →</span>
+    </a>
+  </div>
+</section>
+
 <!-- LIVE 统计 -->
 <section class="ob-section">
   <div class="ob-live">

@@ -75,6 +75,18 @@ const bookParts = [
   }
 ]
 
+const platformParts = [
+  {
+    text: '平台手册',
+    items: [
+      { text: '选对你的第一站', link: '/platforms/' },
+      { text: 'P1 · 聚宽 JoinQuant 上手', link: '/platforms/joinquant' },
+      { text: 'P2 · QMT / miniQMT 上手', link: '/platforms/qmt' },
+      { text: 'P3 · Ptrade 上手', link: '/platforms/ptrade' }
+    ]
+  }
+]
+
 export default defineConfig({
   lang: 'zh-CN',
   title: 'AI 量化橙皮书',
@@ -89,12 +101,14 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '开始阅读', link: '/book/' },
+      { text: '平台手册', link: '/platforms/' },
       { text: '帮你解决', link: '/solve/' },
       { text: '阅读指南', link: '/guide/' },
       { text: '关于猫哥', link: '/about/' }
     ],
     sidebar: {
-      '/book/': bookParts
+      '/book/': bookParts,
+      '/platforms/': platformParts
     },
     socialLinks: [{ icon: 'github', link: 'https://github.com/Cat-Geek' }],
     outline: { level: [2, 3], label: '本页目录' },
